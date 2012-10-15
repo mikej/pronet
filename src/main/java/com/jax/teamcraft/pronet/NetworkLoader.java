@@ -116,7 +116,6 @@ public class NetworkLoader {
 									+ "] ignoring...");
 						} else {
 							programmer.addRecommendation(recommendedProgrammer);
-						
 						}
 					}
 
