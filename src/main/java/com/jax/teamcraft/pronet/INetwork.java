@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.jax.temcraft.pronet;
+package com.jax.teamcraft.pronet;
 
 import java.util.Collection;
 

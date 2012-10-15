@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.jax.temcraft.pronet;
+package com.jax.teamcraft.pronet;
 
 import java.util.Collection;
 
@@ -23,7 +23,7 @@ public class Network implements INetwork  {
 
 	@Override
 	public void load(String uri) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	
