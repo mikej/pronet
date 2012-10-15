@@ -30,6 +30,10 @@ public class Network {
 	public Collection<Programmer> getProgrammers() {
 		return programmers;
 	}
+	
+	public void setProgrammers(Collection<Programmer> programmers) {
+		this.programmers = programmers;
+	}
 
 	public void load(String uri) {
 		parseXmlFile(uri);

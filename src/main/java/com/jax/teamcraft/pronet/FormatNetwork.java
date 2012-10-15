@@ -1,5 +1,8 @@
 package com.jax.teamcraft.pronet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 
 public class FormatNetwork {
@@ -9,7 +12,11 @@ public class FormatNetwork {
 		sb.append(formatLine("Name", "Skills", "Recommends"));
 		for (Programmer programmer : network.getProgrammers()) {
 			String skillList = StringUtils.join(programmer.getSkills(), ',');
-			String recommends = StringUtils.join(programmer.getRecommendations(), ',');
+			List<String> names = new ArrayList<String>();
+			for (Programmer p : programmer.getRecommendations()) {
+				names.add(p.getName());
+			}
+			String recommends = StringUtils.join(names, ',');
 			sb.append(formatLine(programmer.getName(), skillList, recommends));
 		}
 		return sb.toString();
