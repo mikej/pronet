@@ -9,7 +9,7 @@ public class ShowNetwork {
 
 	private void run(String[] args) {
 		String filename = args[0];
-		INetwork network = new Network();
+		Network network = new Network();
 		network.load(filename);
 		System.out.println(new FormatNetwork().formatNetwork(network));
 	}

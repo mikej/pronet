@@ -23,22 +23,17 @@ import org.xml.sax.SAXException;
  * @author gordon
  * 
  */
-public class Network implements INetwork {
+public class Network {
 
-	Collection<IProgrammer> programmers = new ArrayList<IProgrammer>();
+	Collection<Programmer> programmers = new ArrayList<Programmer>();
 
-	@Override
-	public Collection<IProgrammer> getProgrammers() {
-		
+	public Collection<Programmer> getProgrammers() {
 		return programmers;
 	}
 
-	@Override
 	public void load(String uri) {
-
 		parseXmlFile(uri);
 	}
-
 	
 	/**
 	 * Perform the DOM loading of the specified XML file
@@ -98,7 +93,10 @@ public class Network implements INetwork {
 				
 				NodeList recommendations = el.getElementsByTagName("Recommendation");
 				results = parseChildren(recommendations);
-				programmer.setRecommendations(results);
+				
+				// FIXME this will now need to be a list of Programmer objects rather
+				// than Strings
+				// programmer.setRecommendations(results);
 
 				// Add the programmer to the collection
 				programmers.add(programmer);

@@ -4,10 +4,10 @@ import org.apache.commons.lang.StringUtils;
 
 public class FormatNetwork {
 
-	public String formatNetwork(INetwork network) {
+	public String formatNetwork(Network network) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(formatLine("Name", "Skills", "Recommends"));
-		for (IProgrammer programmer : network.getProgrammers()) {
+		for (Programmer programmer : network.getProgrammers()) {
 			String skillList = StringUtils.join(programmer.getSkills(), ',');
 			String recommends = StringUtils.join(programmer.getRecommendations(), ',');
 			sb.append(formatLine(programmer.getName(), skillList, recommends));
