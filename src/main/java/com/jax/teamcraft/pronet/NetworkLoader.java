@@ -21,19 +21,23 @@ import org.xml.sax.SAXException;
 
 /**
  * @author gordon
- *
+ * 
  */
 public class NetworkLoader {
 
+
+	Collection<IProgrammer> programmers = new ArrayList<IProgrammer>();
+
+	
 	/**
 	 * Perform the DOM loading of the specified XML file
-	 * @param filename The name of the file to load
+	 * 
+	 * @param filename
+	 *            The name of the file to load
 	 */
 	public Collection<IProgrammer> parseXmlFile(String filename) {
 		Document dom;
 
-		Collection<IProgrammer> programmers = new ArrayList<IProgrammer>();
-		
 		// get the factory
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -42,10 +46,11 @@ public class NetworkLoader {
 			// Using factory get an instance of document builder
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			// parse using builder to get DOM representation of the XML file
-			dom = db.parse(filename);
-			parseDocument(dom , programmers);
-
+			for (int pass = 1; pass <= 2; pass++) {
+				// parse using builder to get DOM representation of the XML file
+				dom = db.parse(filename);
+				parseDocument(dom,pass);
+			}
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
 		} catch (SAXException se) {
@@ -53,15 +58,18 @@ public class NetworkLoader {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-		
+
 		return programmers;
 	}
 
 	/**
 	 * Parse the actual document and create programmers
-	 * @param dom The document to read
+	 * 
+	 * @param dom
+	 *            The document to read
 	 */
-	private void parseDocument(Document dom , Collection<IProgrammer> programmers) {
+	private void parseDocument(Document dom, int pass) {
+
 		// get a nodelist of <employee> elements
 		NodeList nl = dom.getElementsByTagName("Programmer");
 		if (nl != null && nl.getLength() > 0) {
@@ -69,34 +77,67 @@ public class NetworkLoader {
 
 				// get the employee element
 				Node node = nl.item(i);
+				Element el = (Element) node;
 				NamedNodeMap attrs = node.getAttributes();
 
 				Node nameNode = attrs.getNamedItem("name");
+				String programmerName = nameNode.getNodeValue();
+				
+				if (1 == pass) {
+					// CReate the programmer
+					Programmer programmer = new Programmer();
+					programmer.setName(programmerName);
 
-				// CReate the programmer
-				Programmer programmer = new Programmer();
-				programmer.setName(nameNode.getNodeValue());
+				
+					NodeList skills = el.getElementsByTagName("Skill");
+					List<String> results = parseChildren(skills);
 
-				
-				Element el = (Element)node;
-				
-				NodeList skills = el.getElementsByTagName("Skill");
-				List<String> results = parseChildren(skills);
-				
-				programmer.setSkills(results);
-				
-				NodeList recommendations = el.getElementsByTagName("Recommendation");
-				results = parseChildren(recommendations);
-				programmer.setRecommendations(results);
+					programmer.setSkills(results);
+					
+					// Add the programmer to the collection
+					programmers.add(programmer);
+				} 
 
-				// Add the programmer to the collection
-				programmers.add(programmer);
+				// On second pass lookup the referenced programmers
+				if (2 == pass) {
+					
+					// Lookup this programmer
+					Programmer programmer = lookup(programmerName);
+					
+					if( null != programmer) {
+						continue;
+					}
+					
+					NodeList recommendations = el
+							.getElementsByTagName("Recommendation");
+					List<String> results = parseChildren(recommendations);
+					
+					for(String name : results) {
+					//	programmer.
+					}
+					
+					programmer.setRecommendations(results);
+				}
+				
 			}
 		}
 	}
 
-	private List<String> parseChildren(NodeList items) {
+
+	/**
+	 * 
+	 * @param programmerName
+	 * @return
+	 */
+	private Programmer lookup(String programmerName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
+	
+	private List<String> parseChildren(NodeList items) {
+
 		List<String> results = new ArrayList<String>();
 		for (int sk = 0; sk < items.getLength(); sk++) {
 			Node skill = items.item(sk);
@@ -105,7 +146,7 @@ public class NetworkLoader {
 				results.add(skill.getTextContent().trim());
 			}
 		}
-		
+
 		return results;
 	}
 }
