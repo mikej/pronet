@@ -1,4 +1,4 @@
-package com.jax.temcraft.pronet;
+package com.jax.teamcraft;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.jax.teamcraft.pronet.KudosCalculator;
 import com.jax.teamcraft.pronet.Network;
 import com.jax.teamcraft.pronet.Programmer;
 

@@ -1,13 +1,10 @@
-package com.jax.temcraft.pronet;
+package com.jax.teamcraft.pronet;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.jax.teamcraft.pronet.IProgrammer;
-import com.jax.teamcraft.pronet.Network;
-import com.jax.teamcraft.pronet.Programmer;
 
 public class KudosCalculator {
 
