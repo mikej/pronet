@@ -23,12 +23,30 @@ public class FormatNetworkTest {
 				return Arrays.asList("Java", "Ruby");
 			}
 			
-			public Collection<String> getRecommendations() {
+			public List<String> getRecommendations() {
 				return Arrays.asList("Bob", "Sue");
 			}
 			
 			public String getName() {
 				return "Andy";
+			}
+
+			@Override
+			public void setName(String name) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void setSkills(List<String> skills) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void setRecommendations(List<String> recommendations) {
+				// TODO Auto-generated method stub
+				
 			}
 		};
 		

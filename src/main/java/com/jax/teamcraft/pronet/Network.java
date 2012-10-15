@@ -6,6 +6,7 @@ package com.jax.teamcraft.pronet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,6 +39,11 @@ public class Network implements INetwork {
 		parseXmlFile(uri);
 	}
 
+	
+	/**
+	 * Perform the DOM loading of the specified XML file
+	 * @param filename The name of the file to load
+	 */
 	private void parseXmlFile(String filename) {
 		Document dom;
 
@@ -62,6 +68,10 @@ public class Network implements INetwork {
 		}
 	}
 
+	/**
+	 * Parse the actual document and create programmers
+	 * @param dom The document to read
+	 */
 	private void parseDocument(Document dom) {
 		// get a nodelist of <employee> elements
 		NodeList nl = dom.getElementsByTagName("Programmer");
@@ -82,12 +92,12 @@ public class Network implements INetwork {
 				Element el = (Element)node;
 				
 				NodeList skills = el.getElementsByTagName("Skill");
-				Collection<String> results = parseSkills(skills);
+				List<String> results = parseChildren(skills);
 				
 				programmer.setSkills(results);
 				
-				NodeList recommendations = el.getElementsByTagName("Recommendations");
-				results = parseSkills(recommendations);
+				NodeList recommendations = el.getElementsByTagName("Recommendation");
+				results = parseChildren(recommendations);
 				programmer.setRecommendations(results);
 
 				// Add the programmer to the collection
@@ -96,9 +106,9 @@ public class Network implements INetwork {
 		}
 	}
 
-	private Collection<String> parseSkills(NodeList items) {
+	private List<String> parseChildren(NodeList items) {
 	
-		Collection<String> results = new ArrayList<String>();
+		List<String> results = new ArrayList<String>();
 		for (int sk = 0; sk < items.getLength(); sk++) {
 			Node skill = items.item(sk);
 

@@ -18,10 +18,10 @@ public interface IProgrammer {
 	
 	public List<String> getSkills();
 
-	public void setSkills(Collection<String>skills);
+	public void setSkills(List<String>skills);
 	
-	public void setRecommendations(Collection<String>recommendations);
+	public void setRecommendations(List<String>recommendations);
 	
-	public Collection<String> getRecommendations();
+	public List<String> getRecommendations();
 
 }

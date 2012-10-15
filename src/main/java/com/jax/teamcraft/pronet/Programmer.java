@@ -13,8 +13,8 @@ import java.util.List;
 public class Programmer implements IProgrammer {
 
 	String name;
-	Collection<String> skills;
-	Collection<String> recommendations;
+	List<String> skills;
+	List<String> recommendations;
 
 	@Override
 	public String getName() {
@@ -27,22 +27,20 @@ public class Programmer implements IProgrammer {
 	
 	@Override
 	public List<String> getSkills() {
-		// TODO Auto-generated method stub
-		return null;
+		return skills;
 	}
 
-	public void setSkills(Collection<String>skills) {
+	public void setSkills(List<String>skills) {
 		this.skills = skills;
 	}
 	
-	public void setRecommendations(Collection<String>recommendations) {
+	public void setRecommendations(List<String>recommendations) {
 		this.recommendations = recommendations;
 	}
 	
 	@Override
-	public Collection<String> getRecommendations() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getRecommendations() {
+		return recommendations;
 	}
 
 	
