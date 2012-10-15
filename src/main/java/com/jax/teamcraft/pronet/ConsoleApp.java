@@ -19,6 +19,7 @@ public class ConsoleApp {
 		System.out.println("Welcome to ProNet Delux!!!");
 		System.out.println("\nCommands : ");
 		System.out.println("\tload {filename}");
+		System.out.println("\tkudos {filename}");
 		System.out.println("\texit");
 		
 		Console console = System.console();

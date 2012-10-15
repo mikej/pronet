@@ -10,17 +10,27 @@ public class FormatNetwork {
 	public String formatNetwork(Network network) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(formatLine("Name", "Skills", "Recommends"));
+		extractProgrammers(network, sb);
+		
+		return sb.toString();
+	}
+
+	private void extractProgrammers(Network network, StringBuilder sb) {
 		for (Programmer programmer : network.getProgrammers()) {
-			String skillList = StringUtils.join(programmer.getSkills(), ',');
-			List<String> names = new ArrayList<String>();
-			for (Programmer p : programmer.getRecommendations()) {
-				
-				names.add(p.getName());
-			}
+			List<String> names = extractNames(programmer);
 			String recommends = StringUtils.join(names, ',');
+			String skillList = StringUtils.join(programmer.getSkills(), ',');
+			
 			sb.append(formatLine(programmer.getName(), skillList, recommends));
 		}
-		return sb.toString();
+	}
+
+	private List<String> extractNames(Programmer programmer) {
+		List<String> names = new ArrayList<String>();
+		for (Programmer p : programmer.getRecommendations()) {
+			names.add(p.getName());
+		}
+		return names;
 	}
 
 	private String formatLine(String f1, String f2, String f3) {

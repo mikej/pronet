@@ -72,10 +72,6 @@ public class Programmer {
 		return sb.toString();
 	}
 
-	/**
-	 * Add a new recommendation
-	 * @param p The programmer to add
-	 */
 	public void addRecommendation(Programmer p) {
 		recommendations.add(p);
 	}
