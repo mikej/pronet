@@ -29,9 +29,11 @@ public class ConsoleApp {
 			String[] tokens = cmd.split(" ");
 
 			if (tokens[0].equals("load")) {
-				Network network = new Network();
-				network.load(tokens[1]);
+				Network network = loadNetwork(tokens);
 				System.out.println(new FormatNetwork().formatNetwork(network));
+			} else if (tokens[0].equals("kudos")) {
+				Network network = loadNetwork(tokens);
+				System.out.println(new FormatKudos().formatKudos(network));
 			} else if (tokens[0].equals("help")) {
 				System.out.println("Not in these timescales !");
 			} else if (tokens[0].equals("exit")) {
@@ -42,6 +44,12 @@ public class ConsoleApp {
 			}
 		}
 
+	}
+
+	private static Network loadNetwork(String[] tokens) {
+		Network network = new Network();
+		network.load(tokens[1]);
+		return network;
 	}
 
 }

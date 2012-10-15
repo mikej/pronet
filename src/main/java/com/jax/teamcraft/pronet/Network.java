@@ -25,5 +25,4 @@ public class Network {
 	public void load(String uri) {
 		programmers = new NetworkLoader().parseXmlFile(uri);
 	}
-
 }
