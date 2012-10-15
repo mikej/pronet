@@ -25,17 +25,15 @@ import org.xml.sax.SAXException;
  */
 public class NetworkLoader {
 
+	Collection<Programmer> programmers = new ArrayList<Programmer>();
 
-	Collection<IProgrammer> programmers = new ArrayList<IProgrammer>();
-
-	
 	/**
 	 * Perform the DOM loading of the specified XML file
 	 * 
 	 * @param filename
 	 *            The name of the file to load
 	 */
-	public Collection<IProgrammer> parseXmlFile(String filename) {
+	public Collection<Programmer> parseXmlFile(String filename) {
 		Document dom;
 
 		// get the factory
@@ -49,7 +47,7 @@ public class NetworkLoader {
 			for (int pass = 1; pass <= 2; pass++) {
 				// parse using builder to get DOM representation of the XML file
 				dom = db.parse(filename);
-				parseDocument(dom,pass);
+				parseDocument(dom, pass);
 			}
 		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
@@ -82,47 +80,51 @@ public class NetworkLoader {
 
 				Node nameNode = attrs.getNamedItem("name");
 				String programmerName = nameNode.getNodeValue();
-				
+
 				if (1 == pass) {
 					// CReate the programmer
 					Programmer programmer = new Programmer();
 					programmer.setName(programmerName);
 
-				
 					NodeList skills = el.getElementsByTagName("Skill");
 					List<String> results = parseChildren(skills);
 
 					programmer.setSkills(results);
-					
+
 					// Add the programmer to the collection
 					programmers.add(programmer);
-				} 
+				}
 
 				// On second pass lookup the referenced programmers
 				if (2 == pass) {
-					
+
 					// Lookup this programmer
 					Programmer programmer = lookup(programmerName);
-					
-					if( null != programmer) {
+
+					if (null == programmer) {
 						continue;
 					}
-					
+
 					NodeList recommendations = el
 							.getElementsByTagName("Recommendation");
 					List<String> results = parseChildren(recommendations);
-					
-					for(String name : results) {
-					//	programmer.
+
+					for (String name : results) {
+						Programmer recommendedProgrammer = lookup(name);
+						if (recommendedProgrammer == null) {
+							System.out.println("Unknown name [" + name
+									+ "] ignoring...");
+						} else {
+							programmer.addRecommendation(recommendedProgrammer);
+						
+						}
 					}
-					
-					programmer.setRecommendations(results);
+
 				}
-				
+
 			}
 		}
 	}
-
 
 	/**
 	 * 
@@ -130,12 +132,15 @@ public class NetworkLoader {
 	 * @return
 	 */
 	private Programmer lookup(String programmerName) {
-		// TODO Auto-generated method stub
+
+		for (Programmer p : programmers) {
+			if (p.getName().equalsIgnoreCase(programmerName)) {
+				return p;
+			}
+		}
 		return null;
 	}
 
-	
-	
 	private List<String> parseChildren(NodeList items) {
 
 		List<String> results = new ArrayList<String>();

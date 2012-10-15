@@ -10,22 +10,20 @@ import java.util.Collection;
  * @author gordon
  * 
  */
-public class Network implements INetwork {
+public class Network {
 
-	Collection<IProgrammer> programmers = new ArrayList<IProgrammer>();
+	Collection<Programmer> programmers = new ArrayList<Programmer>();
 
-	@Override
-	public Collection<IProgrammer> getProgrammers() {
-		
+	public Collection<Programmer> getProgrammers() {
 		return programmers;
 	}
-
-	@Override
-	public void load(String uri) {
-
-		programmers = new NetworkLoader().parseXmlFile(uri);
+	
+	public void setProgrammers(Collection<Programmer> programmers) {
+		this.programmers = programmers;
 	}
 
-	
+	public void load(String uri) {
+		programmers = new NetworkLoader().parseXmlFile(uri);
+	}
 
 }

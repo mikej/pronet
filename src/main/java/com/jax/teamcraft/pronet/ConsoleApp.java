@@ -29,7 +29,7 @@ public class ConsoleApp {
 			String[] tokens = cmd.split(" ");
 
 			if (tokens[0].equals("load")) {
-				INetwork network = new Network();
+				Network network = new Network();
 				network.load(tokens[1]);
 				System.out.println(new FormatNetwork().formatNetwork(network));
 			} else if (tokens[0].equals("help")) {

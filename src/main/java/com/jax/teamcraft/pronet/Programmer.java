@@ -3,20 +3,19 @@
  */
 package com.jax.teamcraft.pronet;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author gpimblott
  * 
  */
-public class Programmer implements IProgrammer {
+public class Programmer {
 
 	String name;
-	List<String> skills;
-	List<String> recommendations;
+	List<String> skills = new ArrayList<String>();
+	List<Programmer> recommendations = new ArrayList<Programmer>();
 
-	@Override
 	public String getName() {
 		return name;
 	}
@@ -25,7 +24,6 @@ public class Programmer implements IProgrammer {
 		this.name = name;
 	}
 	
-	@Override
 	public List<String> getSkills() {
 		return skills;
 	}
@@ -34,15 +32,33 @@ public class Programmer implements IProgrammer {
 		this.skills = skills;
 	}
 	
-	public void setRecommendations(List<String>recommendations) {
+	public void setRecommendations(List<Programmer> recommendations) {
 		this.recommendations = recommendations;
 	}
 	
-	@Override
-	public List<String> getRecommendations() {
+	public List<Programmer> getRecommendations() {
 		return recommendations;
 	}
-
+	
+	public void setRecommendedBy(List<Programmer> programmers) {
+		
+	}
+	
+	public List<Programmer> getRecommendedBy() {
+		return null;
+	}
+	
+	public List<Programmer> getConnections() {
+		return null;
+	}
+	
+	public double getKudos() {
+		return 0.0;
+	}
+	
+	public void setKudos(double kudos) {
+		
+	}
 	
 	@Override
 	public String toString() {
@@ -54,5 +70,14 @@ public class Programmer implements IProgrammer {
 		sb.append("Recommendations:" + recommendations.toString() + "\n");
 		
 		return sb.toString();
+	}
+
+	/**
+	 * Add a new recommendation
+	 * @param p The programmer to add
+	 */
+	public void addRecommendation(Programmer p) {
+		recommendations.add(p);
+		
 	}
 }

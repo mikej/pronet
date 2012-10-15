@@ -15,7 +15,8 @@ public class SimpleTest {
 	public static void main(String[] args) {
 		Network network = new Network();
 		network.load("ProNet.xml");
-
+		System.out.println(new FormatNetwork().formatNetwork(network));
+//network.getProgrammers()
 	}
 
 }
