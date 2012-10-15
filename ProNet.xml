@@ -24,6 +24,7 @@
   </Programmer>
   <Programmer name='Ed'>
     <Recommendations>
+      <Recommendation>Bill</Recommendation>
       <Recommendation>Liz</Recommendation>
       <Recommendation>Rick</Recommendation>
     </Recommendations>

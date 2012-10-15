@@ -23,7 +23,7 @@ public class FormatKudos {
 	}
 	
 	private String formatLine(String f1, double f2) {
-		return String.format("%-10s %-4f \n", f1, f2);
+		return String.format("%-10s %-4.2f \n", f1, f2);
 	}
 
 }

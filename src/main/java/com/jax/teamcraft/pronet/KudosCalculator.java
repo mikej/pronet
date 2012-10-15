@@ -12,15 +12,12 @@ public class KudosCalculator {
 	private static double delta = 0.00001;
 
 	public Network calculate(Network network) {
-		Map<String, Programmer> programmers = loadProgrammers(network
-				.getProgrammers());
 
-		for (int i = 0; ; ++i) {
+		while(true) {
 			double highestDelta = 0;
 			// foreach programmer
-			for (Entry<String, Programmer> e : programmers.entrySet()) {
+			for (Programmer p : network.getProgrammers()) {
 				// calculate kudos from his followers
-				Programmer p = e.getValue();
 				double newKudos = calculateScore(p);
 				double oldKudos = p.getKudos();
 				p.setKudos(newKudos);
@@ -28,7 +25,7 @@ public class KudosCalculator {
 				if (kudosDelta > highestDelta)
 					highestDelta = kudosDelta;
 			}
-			if (highestDelta < delta && i > 100)
+			if (highestDelta < delta)
 				break;
 		}
 
@@ -49,15 +46,6 @@ public class KudosCalculator {
 		score = d * score + (1 - d);
 
 		return score;
-	}
-
-	private Map<String, Programmer> loadProgrammers(
-			Collection<Programmer> programmers) {
-		HashMap<String, Programmer> map = new HashMap<String, Programmer>();
-		for (Programmer p : programmers) {
-			map.put(p.getName(), (Programmer) p);
-		}
-		return map;
 	}
 
 }
