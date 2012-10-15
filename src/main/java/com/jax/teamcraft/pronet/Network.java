@@ -122,4 +122,9 @@ public class Network {
 		return results;
 	}
 
+	public void setProgrammers(
+			Collection<Programmer> programmers) {
+		this.programmers = programmers;
+	}
+
 }

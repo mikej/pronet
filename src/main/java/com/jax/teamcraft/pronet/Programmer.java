@@ -19,6 +19,7 @@ public class Programmer {
 	List<String> skills;
 	List<Programmer> recommendations;
 	private List<Programmer> recommendedBy;
+	private double kudos;
 
 	public String getName() {
 		return name;
@@ -27,55 +28,55 @@ public class Programmer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<String> getSkills() {
 		return skills;
 	}
 
-	public void setSkills(List<String>skills) {
+	public void setSkills(List<String> skills) {
 		this.skills = skills;
 	}
-	
+
 	public void setRecommendations(List<Programmer> recommendations) {
 		this.recommendations = recommendations;
 	}
-	
+
 	public List<Programmer> getRecommendations() {
 		return recommendations;
 	}
-	
+
 	public void setRecommendedBy(List<Programmer> recommendedBy) {
 		this.recommendedBy = recommendedBy;
 	}
-	
+
 	public List<Programmer> getRecommendedBy() {
 		return null;
 	}
-	
+
 	public List<Programmer> getConnections() {
 		Set<Programmer> connections = new HashSet<Programmer>();
 		if (recommendations != null) { connections.addAll(recommendations); }
 		if (recommendedBy != null) { connections.addAll(recommendedBy); }
 		return new ArrayList<Programmer>(connections);
 	}
-	
-	public double getKudos() {
-		return 0.0;
-	}
-	
-	public void setKudos(double kudos) {
-		
-	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
-		sb.append("Name:" + name+"\n");
-	
-		sb.append("Skill:" + skills.toString() +"\n");
+
+		sb.append("Name:" + name + "\n");
+
+		sb.append("Skill:" + skills.toString() + "\n");
 		sb.append("Recommendations:" + recommendations.toString() + "\n");
-		
+
 		return sb.toString();
+	}
+
+	public void setKudos(double score) {
+		this.kudos = score;
+	}
+
+	public double getKudos() {
+		return kudos;
 	}
 }
