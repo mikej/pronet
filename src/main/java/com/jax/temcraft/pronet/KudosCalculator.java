@@ -12,24 +12,28 @@ import com.jax.teamcraft.pronet.Programmer;
 public class KudosCalculator {
 
 	private static double d = 0.85;
-	private static double delta = 0.001;
+	private static double delta = 0.00001;
 
 	public Network calculate(Network network) {
 		Map<String, Programmer> programmers = loadProgrammers(network
 				.getProgrammers());
 
-		double oldAvg = Double.MAX_VALUE;
-		double acc = 0;
-		do {
-			acc = 0;
+		for (int i = 0; ; ++i) {
+			double highestDelta = 0;
 			// foreach programmer
 			for (Entry<String, Programmer> e : programmers.entrySet()) {
 				// calculate kudos from his followers
-				double score = calculateScore(e.getValue());
-				e.getValue().setKudos(score);
-				acc += score;
+				Programmer p = e.getValue();
+				double newKudos = calculateScore(p);
+				double oldKudos = p.getKudos();
+				p.setKudos(newKudos);
+				double kudosDelta = Math.abs(oldKudos - newKudos);
+				if (kudosDelta > highestDelta)
+					highestDelta = kudosDelta;
 			}
-		} while (Math.abs(acc / programmers.size() - oldAvg) > delta);
+			if (highestDelta < delta && i > 100)
+				break;
+		}
 
 		// save the value
 		// repeat until avg ~= 1
@@ -42,8 +46,8 @@ public class KudosCalculator {
 		double score = 0;
 		for (Programmer p2 : recomends) {
 			double k = p2.getKudos();
-			int count = p2.getRecommendations().size();
-			score += count == 0 ? 0 : k / count;
+			double count = p2.getRecommendations().size();
+			score += k / count;
 		}
 		score = d * score + (1 - d);
 

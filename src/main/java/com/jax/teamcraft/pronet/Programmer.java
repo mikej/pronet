@@ -45,12 +45,13 @@ public class Programmer {
 		return recommendations;
 	}
 
+
 	public void setRecommendedBy(List<Programmer> recommendedBy) {
 		this.recommendedBy = recommendedBy;
 	}
 
 	public List<Programmer> getRecommendedBy() {
-		return null;
+		return recommendedBy;
 	}
 
 	public List<Programmer> getConnections() {
