@@ -16,6 +16,6 @@ public interface IProgrammer {
 
 	public List<String> getSkills();
 
-	public Collection<IProgrammer> getRecommendations();
+	public Collection<String> getRecommendations();
 
 }

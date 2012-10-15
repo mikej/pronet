@@ -25,7 +25,7 @@ public class Programmer implements IProgrammer{
 	}
 
 	@Override
-	public Collection<IProgrammer> getRecommendations() {
+	public Collection<String> getRecommendations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
