@@ -3,8 +3,11 @@
  */
 package com.jax.teamcraft.pronet;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author gpimblott
@@ -15,6 +18,7 @@ public class Programmer {
 	String name;
 	List<String> skills;
 	List<Programmer> recommendations;
+	private List<Programmer> recommendedBy;
 
 	public String getName() {
 		return name;
@@ -40,8 +44,8 @@ public class Programmer {
 		return recommendations;
 	}
 	
-	public void setRecommendedBy(List<Programmer> programmers) {
-		
+	public void setRecommendedBy(List<Programmer> recommendedBy) {
+		this.recommendedBy = recommendedBy;
 	}
 	
 	public List<Programmer> getRecommendedBy() {
@@ -49,7 +53,10 @@ public class Programmer {
 	}
 	
 	public List<Programmer> getConnections() {
-		return null;
+		Set<Programmer> connections = new HashSet<Programmer>();
+		if (recommendations != null) { connections.addAll(recommendations); }
+		if (recommendedBy != null) { connections.addAll(recommendedBy); }
+		return new ArrayList<Programmer>(connections);
 	}
 	
 	public double getKudos() {
